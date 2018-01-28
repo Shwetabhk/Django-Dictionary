@@ -1,4 +1,5 @@
-<html><head>
+<html>
+    <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,15 +14,18 @@
    <br>
    <center><button class="btn btn-default" type="submit">Submit</button></center>
    <br>
-   <div>{{word}} - </div>
-   <div>
+   <div style="padding:8px;margin:2px" >{{word}} - </div>
+   <div style="padding:15px;margin:2px" > 
         <il>   
             {% for i in meaning %}
                 <li>{{i}}</li>
             {% endfor %}
         </il>
     {%else%}
-        <div>Please Login or register to access this page!</div>
+        <div>Please <a href="login">Login</a> or <a href="register">register</a> to access this page!</div>
     {%endif%}
    </div>
+   {%if request.user.is_authenticated%}
+   <footer><center><a href="logout"><button class="btn btn-default" type="button">logout</button></a></center></footer>
+   {%endif%}
 </form>

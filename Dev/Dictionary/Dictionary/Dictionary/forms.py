@@ -4,13 +4,13 @@ User=get_user_model()
 class DictionaryForm(forms.Form):
     word=forms.CharField(label="Enter the word",widget=forms.TextInput(attrs={"placeholder":"Enter the word","class":"form-control"}))
 class LoginForm(forms.Form):
-    username=forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Enter Username"}))
-    password=forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Enter Password"}))
+    username=forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Enter Username","class":"form-control"}))
+    password=forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Enter Password","class":"form-control"}))
 class RegisterForm(forms.Form):
-    username=forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Enter Username"}))
-    email=forms.EmailField(widget=forms.EmailInput(attrs={"placeholder":"Enter E-mail"}))
-    password=forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Enter Password"}))
-    conpassword=forms.CharField(label='Confirm Password',widget=forms.PasswordInput(attrs={"placeholder":"Confirm Password"}))
+    username=forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Enter Username","class":"form-control"}))
+    email=forms.EmailField(widget=forms.EmailInput(attrs={"placeholder":"Enter E-mail","class":"form-control"}))
+    password=forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Enter Password","class":"form-control"}))
+    conpassword=forms.CharField(label='Confirm Password',widget=forms.PasswordInput(attrs={"placeholder":"Confirm Password","class":"form-control"}))
     def clean_username(self):
         username=self.cleaned_data.get("username")
         qs=User.objects.filter(username=username)

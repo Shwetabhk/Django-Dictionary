@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect,render
 from .forms import LoginForm,RegisterForm,DictionaryForm
 from .Dictionary_module import find
-from django.contrib.auth import login,authenticate,get_user_model
+from django.contrib.auth import login,authenticate,get_user_model,logout
 def home_page(request):
     context={
         "head":"Dictionary-Home",
@@ -55,3 +55,6 @@ def dictionary_page(request):
         context["word"]=word
         context["meaning"]=find(word)
     return render(request,"dict.html",context)
+def logout_page(request):
+    logout(request)
+    return redirect("/")
