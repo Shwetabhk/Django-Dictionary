@@ -2,6 +2,7 @@ import json
 import difflib
 from difflib import SequenceMatcher
 data=json.load(open("data.json",'r'))
+dkeys=list(data.keys())
 def definition(key):      
     value=data[key]
     return value
@@ -9,16 +10,14 @@ def find(key):
     key=key.lower()
     try:
         value=definition(key)
-        return value
+        return value,1
     except:
-        flag=0
-        for i in data:
+        l=[]
+        j=0
+        for i in dkeys:
             amt=SequenceMatcher(None,key,i).ratio()
-            if(amt>0.7):
-                print("Did you mean "+i+" ? Input yes or no")
-            #    flag=1
-             #   answer=input().lower()
-              #  if answer=="yes":
-               #     return definition(i)
-        #if(flag==0):
-         #   return "Word not found"
+            if(amt>0.8):
+                l.insert(j,i)
+                j=j+1
+        return l,None
+            

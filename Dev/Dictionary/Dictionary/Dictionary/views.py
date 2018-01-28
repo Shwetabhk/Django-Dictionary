@@ -50,10 +50,12 @@ def dictionary_page(request):
     }
     if form.is_valid():
         word=form.cleaned_data.get("word")
-        x=find(word)
+        x,answer=find(word)
+        print(answer)
         print(type(x))
         context["word"]=word
-        context["meaning"]=find(word)
+        context["meaning"]=x
+        context["flag"]=answer
     return render(request,"dict.html",context)
 def logout_page(request):
     logout(request)

@@ -14,13 +14,24 @@
    <br>
    <center><button class="btn btn-default" type="submit">Submit</button></center>
    <br>
-   <div style="padding:8px;margin:2px" >{{word}} - </div>
+        {% if flag is not None %}
+        <div style="padding:8px;margin:2px" >{{word}} - </div>
    <div style="padding:15px;margin:2px" > 
         <il>   
             {% for i in meaning %}
                 <li>{{i}}</li>
             {% endfor %}
-        </il>
+        </il></div>
+        {%else%}
+        <div style="padding:8px;margin:2px" >Oops! Looks like you made a spelling mistake. Please select your word from the list below.</div>
+        <div style="padding:15px;margin:2px" > 
+        <select>
+                {%for i in meaning%}    
+                <option value={{i}}>{{i}}</option>
+                {%endfor%}
+        </select></div>
+        <button class="btn btn-default" type='submit'>Submit</button>
+        {%endif%}
     {%else%}
         <div>Please <a href="login">Login</a> or <a href="register">register</a> to access this page!</div>
     {%endif%}
