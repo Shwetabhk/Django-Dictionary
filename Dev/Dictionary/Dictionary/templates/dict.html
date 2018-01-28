@@ -8,7 +8,20 @@
     <title>{{head}}</title>
   </head></html>
 <form method='POST'> {%csrf_token%}
-   <center> {{content}} </center>
+    {% if request.user.is_authenticated %}
+    <center> {{content}} </center>
    <br>
    <center><button class="btn btn-default" type="submit">Submit</button></center>
+   <br>
+   <div>{{word}} - </div>
+   <div>
+        <il>   
+            {% for i in meaning %}
+                <li>{{i}}</li>
+            {% endfor %}
+        </il>
+    {%else%}
+        <div>Please Login or register to access this page!</div>
+    {%endif%}
+   </div>
 </form>

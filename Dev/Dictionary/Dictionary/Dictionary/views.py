@@ -50,5 +50,8 @@ def dictionary_page(request):
     }
     if form.is_valid():
         word=form.cleaned_data.get("word")
-        print(find(word))
+        x=find(word)
+        print(type(x))
+        context["word"]=word
+        context["meaning"]=find(word)
     return render(request,"dict.html",context)

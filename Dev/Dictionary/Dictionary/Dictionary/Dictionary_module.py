@@ -2,10 +2,8 @@ import json
 import difflib
 from difflib import SequenceMatcher
 data=json.load(open("data.json",'r'))
-def definition(key):
-    value=""
-    for i in range(0,len(data[key])):      
-        value=value+data[key][i]+"\n"
+def definition(key):      
+    value=data[key]
     return value
 def find(key):
     ch=1
