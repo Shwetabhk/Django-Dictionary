@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <title>{{head}}</title>
+  </head>
+  <body>
+    <center>
+        <form method='POST'> {%csrf_token%}
+        {% if request.user.is_authenticated %}
+            <div class='form-class container col-3'><center> {{content}} </center>
+                <br>
+                <center>
+                    <button class="btn btn-default" type="submit">Submit</button>
+                </center>
+            </div>
+            <br>
+        </form>
+    </center>
+            {% if flag is 1 %}
+                <div class='container col-9' >
+                        <div style="padding:8px;margin:2px" ><b><u>{{word}} - </u></b></div> 
+                <il>   
+                    <ul class="list-group">
+                    {% for i in meaning %}
+                        <li class="list-group-item">{{i}}</li>
+                    {% endfor %}
+                    </ul>
+                </il></div>
+            {% elif flag is 3 %}
+                <div class="alert alert-success alert-dismissable fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <b>Oops! </b>You entered the wrong word, here are some matching definitions.
+                </div>
+                <ul>   
+                    {% for key,value in options.items %}
+                        <div class='container col-9'>
+                        <li>{{key}}-
+                            <ul class="list-group">
+                            {%for x in value%}
+                            <li class="list-group-item">{{x}}</li>
+                            {%endfor%}
+                        
+                            </ul>
+                        </li>
+                        </div>
+                    {% endfor %}
+                </ul>
+                
+                    
+                {%endif%}
+
+                
+            {%else%}
+                <div>Please <a href="login">Login</a> or <a href="register">register</a> to access this page!</div>
+            {%endif%}
+            
+   {%if request.user.is_authenticated%}
+   <br>
+   <footer><center><a href="logout"><button class="btn btn-default" type="button">logout</button></a></center></footer>
+   {%endif%}
+</form>
+</body>
+</html>
