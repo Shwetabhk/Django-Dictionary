@@ -1,7 +1,10 @@
 import json
 import difflib
 from difflib import SequenceMatcher
-data=json.load(open("data.json",'r'))
+import os
+THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+file = os.path.join(THIS_FOLDER, 'data.json')
+data=json.load(open(file,'r'))
 dkeys=list(data.keys())
 def definition(key):      
     value=data[key]
