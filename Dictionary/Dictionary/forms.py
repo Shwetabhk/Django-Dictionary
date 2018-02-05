@@ -1,10 +1,10 @@
 from django import forms
-from django.contrib.auth import get_user_model
+#from django.contrib.auth import get_user_model
 from .Dictionary_module import find
-User=get_user_model()
+#User=get_user_model()
 class DictionaryForm(forms.Form):
     word=forms.CharField(max_length=27,label="Enter the word",required='false',widget=forms.TextInput(attrs={"placeholder":"Enter the word","required":"false","class":"form-control bg-secondary container","style":"color:white"}))
-class LoginForm(forms.Form):
+'''class LoginForm(forms.Form):
     username=forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Enter Username","class":"form-control"}))
     password=forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Enter Password","class":"form-control"}))
 class RegisterForm(forms.Form):
@@ -30,4 +30,4 @@ class RegisterForm(forms.Form):
         pass2=self.cleaned_data("conpassword")
         if password!=conpassword:
             raise forms.ValidationError("Passwords do not match")
-        return data
+        return data'''

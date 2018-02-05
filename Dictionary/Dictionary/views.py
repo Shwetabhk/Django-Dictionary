@@ -1,10 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect,render
-from .forms import LoginForm,RegisterForm,DictionaryForm
+from .forms import DictionaryForm
 from .Dictionary_module import find
-from django.contrib.auth import login,authenticate,get_user_model,logout
-query=str
-def home_page(request):
+#from django.contrib.auth import login,authenticate,get_user_model,logout
+'''def home_page(request):
     context={
         "head":"Dictionary-Home",
         "title":"Dictionary",
@@ -42,7 +41,7 @@ def register_page(request):
         new_user=User.objects.create_user(username,email,password)
         if new_user is not None:
             return redirect("/login")
-    return render(request,"auth/register.html",context)
+    return render(request,"auth/register.html",context)'''
 def dictionary_page(request):
     form=DictionaryForm(request.POST or None )
     flag=10
@@ -53,8 +52,6 @@ def dictionary_page(request):
     }
     if form.is_valid():
         word=form.cleaned_data.get("word")
-        global query
-        query=word
         x,answer=find(word)
         if (answer==3):
             l=list(x.keys())
@@ -66,6 +63,6 @@ def dictionary_page(request):
         context["meaning"]=x
         context["flag"]=answer
     return render(request,"dict.html",context)
-def logout_page(request):
+'''def logout_page(request):
     logout(request)
-    return redirect("/")
+    return redirect("/")'''
