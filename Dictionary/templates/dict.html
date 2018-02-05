@@ -1,18 +1,25 @@
+{%load static%}
 <html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href='{%static "css/main.css" %}'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <title>{{head}}</title>
   </head>
-  <body>
+  <body class="bg-secondary">
     <center>
         <form method='POST'> {%csrf_token%}
         {% if request.user.is_authenticated %}
-            <div class='form-class container col-3'><center> {{content}} </center>
+        <nav class="navbar navbar-expand-sm bg-dark" style="color:bisque;opacity:0.9">
+                <div class="container col-10"><h3><b>Online Dictionary</b></h3></div>
+                <div class='col-2'><a href="logout"><button class="btn btn-outline-secondary float-right" type="button">logout</button></a></div>
+        </nav>
+        <br><br>
+            <div class='form-group container col-sm-3' style="padding:50px;color:bisque;"><center> {{content}} </center>
                 <br>
                 <center>
                     <button class="btn btn-default" type="submit">Submit</button>
@@ -22,35 +29,42 @@
         </form>
     </center>
             {% if flag is 1 %}
-                <div class='container col-9' >
+                <div class='container col-9 bg-dark' style="color:bisque;padding:12px">
                         <div style="padding:8px;margin:2px" ><b><u>{{word}} - </u></b></div> 
                 <il>   
-                    <ul class="list-group">
+                    <ul class="list-group ">
                     {% for i in meaning %}
-                        <li class="list-group-item">{{i}}</li>
+                        <li class="list-group-item bg-secondary">{{i}}</li>
                     {% endfor %}
                     </ul>
                 </il></div>
             {% elif flag is 3 %}
+                {%if length is 0%}
+                <div class="alert alert-success alert-dismissable fade show">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <b>Oops! </b>No words match your query.
+                </div>
+                {%else%}
                 <div class="alert alert-success alert-dismissable fade show">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
                     <b>Oops! </b>You entered the wrong word, here are some matching definitions.
                 </div>
+                <div class="container" style="overflow-y:scroll;height:400px">
                 <ul>   
                     {% for key,value in options.items %}
-                        <div class='container col-9'>
-                        <li>{{key}}-
+                        <div class='container col-9 bg-dark' style="color:bisque;padding:12px">
+                        <b>{{key}}-</b>
                             <ul class="list-group">
                             {%for x in value%}
-                            <li class="list-group-item">{{x}}</li>
+                            <li class="list-group-item bg-secondary">{{x}}</li>
                             {%endfor%}
                         
                             </ul>
-                        </li>
                         </div>
                     {% endfor %}
                 </ul>
-                
+                </div>
+                {%endif%}
                     
                 {%endif%}
 
@@ -58,11 +72,6 @@
             {%else%}
                 <div>Please <a href="login">Login</a> or <a href="register">register</a> to access this page!</div>
             {%endif%}
-            
-   {%if request.user.is_authenticated%}
-   <br>
-   <footer><center><a href="logout"><button class="btn btn-default" type="button">logout</button></a></center></footer>
-   {%endif%}
 </form>
 </body>
 </html>

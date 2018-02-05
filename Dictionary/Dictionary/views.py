@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect,render
-from .forms import LoginForm,RegisterForm,DictionaryForm,ErrorForm
+from .forms import LoginForm,RegisterForm,DictionaryForm
 from .Dictionary_module import find
 from django.contrib.auth import login,authenticate,get_user_model,logout
 query=str
@@ -49,17 +49,18 @@ def dictionary_page(request):
     context={
         "head":"Find Meaning",
         "content":form,
-        "flag":1    
+        "flag":10    
     }
     if form.is_valid():
         word=form.cleaned_data.get("word")
         global query
         query=word
         x,answer=find(word)
-        print(x)
         if (answer==3):
+            l=list(x.keys())
             context["options"]=x
             context["flag"]=answer
+            context["length"]=len(l)
             return render(request,"dict.html",context)
         context["word"]=word
         context["meaning"]=x

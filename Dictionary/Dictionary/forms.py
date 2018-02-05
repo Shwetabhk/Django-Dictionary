@@ -3,11 +3,7 @@ from django.contrib.auth import get_user_model
 from .Dictionary_module import find
 User=get_user_model()
 class DictionaryForm(forms.Form):
-    word=forms.CharField(max_length=27,label="Enter the word",required='false',widget=forms.TextInput(attrs={"placeholder":"Enter the word","required":"false","class":"form-control"}))
-class ErrorForm(forms.Form):
-    def __init__(self, choi, *args, **kwargs):
-        super(ErrorForm, self).__init__(*args, **kwargs)
-        self.fields['listm'] = forms.ChoiceField(label='Choose the word',required='false',widget=forms.Select(attrs={"required":"false"}),choices=choi)
+    word=forms.CharField(max_length=27,label="Enter the word",required='false',widget=forms.TextInput(attrs={"placeholder":"Enter the word","required":"false","class":"form-control bg-secondary container","style":"color:white"}))
 class LoginForm(forms.Form):
     username=forms.CharField(widget=forms.TextInput(attrs={"placeholder":"Enter Username","class":"form-control"}))
     password=forms.CharField(widget=forms.PasswordInput(attrs={"placeholder":"Enter Password","class":"form-control"}))
